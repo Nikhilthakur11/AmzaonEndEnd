@@ -19,7 +19,7 @@ public class Annotationstest extends Hooks {
 	}
 	public static Logger Logg = Logger.getLogger(Annotationstest.class);
 //LoggerHelper logg=new LoggerHelper();
-	
+	//adding comment
 	Properetyfile pro=new Properetyfile();
 	PageObjectManager pom=PageObjectManager.getInstanceOfSingletonBrowserClass();
 	loginPage lp=new loginPage(pom.getDriver());
