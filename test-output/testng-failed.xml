@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" verbose="10" name="Failed suite [Suite]" parallel="none">
+  <listeners>
+    <listener class-name="PredefinedMethods.TestListener2"/>
+  </listeners>
+  <test name="Amazon Test">
+    <classes>
+      <class name="testing.test.Annotationstest"/>
+    </classes>
+  </test> <!-- Amazon Test -->
+  <test name="Amazon Test(failed)" parallel="none">
+    <classes>
+      <class name="testing.test.Annotationstest">
+        <methods>
+          <include name="add_the_credentials_to_sbi"/>
+          <include name="review_your_order_and_place_order"/>
+          <include name="Setup"/>
+          <include name="proceed_to_buy" invocation-numbers="0 1"/>
+          <include name="choose_delivery_options"/>
+          <include name="teardown"/>
+        </methods>
+      </class> <!-- testing.test.Annotationstest -->
+    </classes>
+  </test> <!-- Amazon Test(failed) -->
+</suite> <!-- Failed suite [Suite] -->
