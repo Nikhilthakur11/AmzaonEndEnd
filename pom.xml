@@ -10,8 +10,11 @@
   <name>test</name>
   <url>http://maven.apache.org</url>
 
-  <properties>
+  <!-- <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties> -->
+  <properties>
+        <java.home>C:/Program Files/Java\jdk1.8.0_161/bin/javac</java.home>
   </properties>
 
   <dependencies>
@@ -59,32 +62,35 @@
 
   </dependencies>
   
-  <build>
-        <!-- Source directory configuration -->
-        <sourceDirectory>src</sourceDirectory>
-        <plugins>
-            <!-- Following plugin executes the testng tests -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.14.1</version>
-                <configuration>
-                    <!-- Suite testng xml file to consider for test execution -->
-                    <suiteXmlFiles>
-                        <suiteXmlFile>testng.xml</suiteXmlFile>
-                        <!-- <suiteXmlFile>suites-test-testng.xml</suiteXmlFile> -->
-                    </suiteXmlFiles>
-                </configuration>
-            </plugin>
-            <!-- Compiler plugin configures the java version to be usedfor compiling 
-                the code -->
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
+ <build>
+		<plugins>
+	<plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-compiler-plugin</artifactId>
+		<version>3.5.1</version>
+		<configuration>
+                      <verbose>true</verbose>
+                      <fork>true</fork>
+                      <executable>${java.home}</executable>
+		<!-- <configuration> -->
+			<source>1.8</source>
+			<target>1.8</target>
+			<encoding>UTF-8</encoding>
+		</configuration>
+	</plugin>
+
+
+
+   <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <version>2.19.1</version>
+    <configuration>
+     <suiteXmlFiles>
+      <suiteXmlFile>testng.xml</suiteXmlFile>
+     </suiteXmlFiles>
+    </configuration>
+   </plugin>
         </plugins>
     </build>
 </project>
