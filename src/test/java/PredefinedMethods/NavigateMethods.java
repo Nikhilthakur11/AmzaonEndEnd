@@ -6,12 +6,17 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import testing.test.PageObjectManager;
 
 public class NavigateMethods extends SelectElementByType {
 	// SelectElementByType eleType= new SelectElementByType();
 	private WebElement element = null;
 	private String old_win = null;
 	private String lastWinHandle;
+	WebDriverWait wait=new WebDriverWait(po.getDriver(), 20);
+	static  PageObjectManager po=PageObjectManager.getInstanceOfSingletonBrowserClass();
 
 	/**
 	 * Method to open link
@@ -20,7 +25,7 @@ public class NavigateMethods extends SelectElementByType {
 	 *            : String : URL for navigation
 	 */
 	public void navigateTo(String url) {
-		driver.get(url);
+		po.getDriver().get(url);
 	}
 
 	/**
@@ -31,14 +36,14 @@ public class NavigateMethods extends SelectElementByType {
 	 */
 	public void navigate(String direction) {
 		if (direction.equals("back"))
-			driver.navigate().back();
+			po.getDriver().navigate().back();
 		else
-			driver.navigate().forward();
+			po.getDriver().navigate().forward();
 	}
 
 	/** Method to quite webdriver instance */
 	public void closeDriver() {
-		driver.close();
+		po.getDriver().close();
 	}
 
 	/**
@@ -65,7 +70,7 @@ public class NavigateMethods extends SelectElementByType {
 	 *            : String : Zoom in or out
 	 */
 	public void zoomInOut(String inOut) {
-		WebElement Sel = driver.findElement(getelementbytype("tagName", "html"));
+		WebElement Sel = po.getDriver().findElement(getelementbytype("tagName", "html"));
 		if (inOut.equals("ADD"))
 			Sel.sendKeys(Keys.chord(getKey(), Keys.ADD));
 		else if (inOut.equals("SUBTRACT"))
@@ -85,7 +90,7 @@ public class NavigateMethods extends SelectElementByType {
 	 *            : String : Locator value
 	 */
 	public void zoomInOutTillElementDisplay(String accessType, String inOut, String accessName) {
-		Actions action = new Actions(driver);
+		Actions action = new Actions(po.getDriver());
 		element = wait.until(ExpectedConditions.presenceOfElementLocated(getelementbytype(accessType, accessName)));
 		while (true) {
 			if (element.isDisplayed())
@@ -104,12 +109,12 @@ public class NavigateMethods extends SelectElementByType {
 	 *            : int : Height for browser resize
 	 */
 	public void resizeBrowser(int width, int height) {
-		driver.manage().window().setSize(new Dimension(width, height));
+		po.getDriver().manage().window().setSize(new Dimension(width, height));
 	}
 
 	/** Method to maximize browser */
 	public void maximizeBrowser() {
-		driver.manage().window().maximize();
+		po.getDriver().manage().window().maximize();
 	}
 
 	/**
@@ -121,7 +126,7 @@ public class NavigateMethods extends SelectElementByType {
 	 *            : String : Locator value
 	 */
 	public void hoverOverElement(String accessType, String accessName) {
-		Actions action = new Actions(driver);
+		Actions action = new Actions(po.getDriver());
 		element = wait.until(ExpectedConditions.presenceOfElementLocated(getelementbytype(accessType, accessName)));
 		action.moveToElement(element).perform();
 	}
@@ -136,7 +141,7 @@ public class NavigateMethods extends SelectElementByType {
 	 */
 	public void scrollToElement(String accessType, String accessName) {
 		element = wait.until(ExpectedConditions.presenceOfElementLocated(getelementbytype(accessType, accessName)));
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		JavascriptExecutor executor = (JavascriptExecutor) po.getDriver();
 		executor.executeScript("arguments[0].scrollIntoView();", element);
 	}
 
@@ -148,7 +153,7 @@ public class NavigateMethods extends SelectElementByType {
 	 * @throws Exception
 	 */
 	public void scrollPage(String to) throws Exception {
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		JavascriptExecutor executor = (JavascriptExecutor) po.getDriver();
 		if (to.equals("end"))
 			executor.executeScript(
 					"window.scrollTo(0,Math.max(document.documentElement.scrollHeight,document.body.scrollHeight,document.documentElement.clientHeight));");
@@ -161,15 +166,15 @@ public class NavigateMethods extends SelectElementByType {
 
 	/** Method to switch to new window */
 	public void switchToNewWindow() {
-		old_win = driver.getWindowHandle();
-		for (String winHandle : driver.getWindowHandles())
+		old_win = po.getDriver().getWindowHandle();
+		for (String winHandle : po.getDriver().getWindowHandles())
 			lastWinHandle = winHandle;
-		driver.switchTo().window(lastWinHandle);
+		po.getDriver().switchTo().window(lastWinHandle);
 	}
 
 	/** Method to switch to old window */
 	public void switchToOldWindow() {
-		driver.switchTo().window(old_win);
+		po.getDriver().switchTo().window(old_win);
 	}
 
 	/**
@@ -181,10 +186,10 @@ public class NavigateMethods extends SelectElementByType {
 	 */
 	public void switchToWindowByTitle(String windowTitle) throws Exception {
 		// System.out.println("++"+windowTitle+"++");
-		old_win = driver.getWindowHandle();
+		old_win = po.getDriver().getWindowHandle();
 		boolean winFound = false;
-		for (String winHandle : driver.getWindowHandles()) {
-			String str = driver.switchTo().window(winHandle).getTitle();
+		for (String winHandle : po.getDriver().getWindowHandles()) {
+			String str = po.getDriver().switchTo().window(winHandle).getTitle();
 			// System.out.println("**"+str+"**");
 			if (str.equals(windowTitle)) {
 				winFound = true;
@@ -197,7 +202,7 @@ public class NavigateMethods extends SelectElementByType {
 
 	/** Method to close new window */
 	public void closeNewWindow() {
-		driver.close();
+		po.getDriver().close();
 	}
 
 	/**
@@ -210,16 +215,16 @@ public class NavigateMethods extends SelectElementByType {
 	 */
 	public void switchFrame(String accessType, String accessName) {
 		if (accessType.equalsIgnoreCase("index"))
-			driver.switchTo().frame(accessName);
+			po.getDriver().switchTo().frame(accessName);
 		else {
 			element = wait.until(ExpectedConditions.presenceOfElementLocated(getelementbytype(accessType, accessName)));
-			driver.switchTo().frame(element);
+			po.getDriver().switchTo().frame(element);
 		}
 	}
 
 	/** method to switch to default content */
 	public void switchToDefaultContent() {
-		driver.switchTo().defaultContent();
+		po.getDriver().switchTo().defaultContent();
 	}
 
 }

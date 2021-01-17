@@ -7,10 +7,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import testing.test.PageObjectManager;
+import testing.test.Properetyfile;
+
 //import com.Filpkart.Shopping.WebdriverSingleton;
 
-import TestSteps.PageObjectManager;
-import other.Properetyfile;
+/*import TestSteps.PageObjectManager;
+import other.Properetyfile;*/
 
 public class SelectElementByType {
 	static Properetyfile pro=new Properetyfile();
@@ -36,7 +39,7 @@ static Select select;
 	 *            : String : Locator value
 	 * @return By
 	 */
-	public By getelementbytype(String type, String access_name) {
+	public static By getelementbytype(String type, String access_name) {
 		switch (type) {
 		case "id":
 			return By.id(access_name);

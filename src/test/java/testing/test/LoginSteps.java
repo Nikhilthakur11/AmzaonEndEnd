@@ -28,7 +28,7 @@ public class LoginSteps{
 	public List<HashMap<String, String>> dataSet;
 	
 	public LoginSteps(){
-	dataSet = ExcelUtils.readExcelDatafromFile();
+	//dataSet = ExcelUtils.readExcelDatafromFile();
 	}
 	loginPage lp=new loginPage(pom.getDriver());
 	
@@ -64,7 +64,7 @@ public class LoginSteps{
 	//int dataRow = Integer.parseInt(excelDataRow)-1;
 	System.out.println("In prod Search page");
 	
-	  lp.search_product();
+	  lp.search_product(product);
 	}
 /*@Test(priority=1)
 	

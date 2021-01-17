@@ -5,12 +5,18 @@ import java.util.List;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import testing.test.PageObjectManager;
 
 public class AssertionMethos extends SelectElementByType{
 	private WebElement element = null;
+	
+	static  PageObjectManager po=PageObjectManager.getInstanceOfSingletonBrowserClass();
+	WebDriverWait wait=new WebDriverWait(po.getDriver(), 20);
 	//this class  contains predefined methods which has assertions(checking page level things)
 	public void checkTitle(String title, boolean testCase) throws TestCaseFailed {
-		String pageTitle = driver.getTitle();
+		String pageTitle = po.getDriver().getTitle();
 
 		if (testCase) {
 			if (!pageTitle.equals(title))
@@ -30,7 +36,7 @@ public class AssertionMethos extends SelectElementByType{
 	 *            : Boolean : test case [true or false]
 	 */
 	public void checkPartialTitle(String partialTitle, boolean testCase) throws TestCaseFailed {
-		String pageTitle = driver.getTitle();
+		String pageTitle = po.getDriver().getTitle();
 		if (testCase) {
 			if (!pageTitle.contains(partialTitle))
 				throw new TestCaseFailed("Partial Page Title Not Present, Actual Page Title : " + pageTitle);
@@ -291,7 +297,7 @@ public class AssertionMethos extends SelectElementByType{
 	 * @return String
 	 */
 	public String getAlertText() {
-		return driver.switchTo().alert().getText();
+		return po.getDriver().switchTo().alert().getText();
 	}
 
 	/**

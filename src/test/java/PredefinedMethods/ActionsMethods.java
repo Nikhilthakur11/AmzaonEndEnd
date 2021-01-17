@@ -6,11 +6,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 
-import Pages.DriverUtil;
+import testing.test.PageObjectManager;
+import testing.test.Properetyfile;
+
+/*import Pages.DriverUtil;
 import TestSteps.PageObjectManager;
 import other.Properetyfile;
-
-public class ActionsMethods extends DriverUtil{
+*/
+public class ActionsMethods {
 	 static Properetyfile pro=new Properetyfile();
 	 static Actions action;
 	static PageObjectManager po=PageObjectManager.getInstanceOfSingletonBrowserClass();

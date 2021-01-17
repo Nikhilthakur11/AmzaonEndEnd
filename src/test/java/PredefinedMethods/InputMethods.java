@@ -5,11 +5,17 @@ import java.util.List;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import testing.test.PageObjectManager;
 
 public class InputMethods extends SelectElementByType {
 	// SelectElementByType eleType= new SelectElementByType();
 	private WebElement dropdown = null;
 	private Select selectList = null;
+	static  PageObjectManager po=PageObjectManager.getInstanceOfSingletonBrowserClass();
+	WebDriverWait wait=new WebDriverWait(po.getDriver(), 20);
 
 	/**
 	 * Method to enter text into text field
@@ -20,11 +26,12 @@ public class InputMethods extends SelectElementByType {
 	 *            : String : Text value to enter in field
 	 * @param accessName
 	 *            : String : Locator value
+	 * @return 
 	 */
-	public void enterText(String accessType, String text, String accessName) {
-		wait.until(ExpectedConditions.presenceOfElementLocated(getelementbytype(accessType, accessName)));
-		driver.findElement(getelementbytype(accessType, accessName)).sendKeys(text);
-	}
+	/*public static void enterText(String accessType, String text, String accessName) {
+		Wait.until(ExpectedConditions.presenceOfElementLocated(getelementbytype(accessType, accessName)));
+		po.getDriver().findElement(getelementbytype(accessType, accessName)).sendKeys(text);
+	}*/
 
 	/**
 	 * Method to clear text of text field
@@ -36,7 +43,7 @@ public class InputMethods extends SelectElementByType {
 	 */
 	public void clearText(String accessType, String accessName) {
 		wait.until(ExpectedConditions.presenceOfElementLocated(getelementbytype(accessType, accessName)));
-		driver.findElement(getelementbytype(accessType, accessName)).clear();
+		po.getDriver().findElement(getelementbytype(accessType, accessName)).clear();
 	}
 
 	/**
@@ -199,7 +206,7 @@ public class InputMethods extends SelectElementByType {
 	 * @param accessName2
 	 */
 	public void selectOptionFromRadioButtonGroup(String accessType, String option, String by, String accessName) {
-		List<WebElement> radioButtonGroup = driver.findElements(getelementbytype(accessType, accessName));
+		List<WebElement> radioButtonGroup = po.getDriver().findElements(getelementbytype(accessType, accessName));
 		for (WebElement rb : radioButtonGroup) {
 			if (by.equals("value")) {
 				if (rb.getAttribute("value").equals(option) && !rb.isSelected())
@@ -212,9 +219,9 @@ public class InputMethods extends SelectElementByType {
 	}
 	public void handleAlert(String decision) {
 		if (decision.equals("accept"))
-			driver.switchTo().alert().accept();
+			po.getDriver().switchTo().alert().accept();
 		else
-			driver.switchTo().alert().dismiss();
+			po.getDriver().switchTo().alert().dismiss();
 	}
 
 }
