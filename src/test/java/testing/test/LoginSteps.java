@@ -60,11 +60,13 @@ public class LoginSteps{
 
 /*@Test(priority=2,dataProvider ="excel-data",dependsOnMethods="user_is_on_HomePage")*/
 	@Test(priority=2)
-	public void user_search_the(String product) throws Throwable {
-	//int dataRow = Integer.parseInt(excelDataRow)-1;
-	System.out.println("In prod Search page");
+	public void user_search_the(String product) throws Exception {
 	
-	  lp.search_product(product);
+		//int dataRow = Integer.parseInt(excelDataRow)-1;
+	
+		System.out.println("In prod Search page");
+	
+	  lp.search_product("perfumes");
 	}
 /*@Test(priority=1)
 	

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name="Suite" verbose="10">
+<suite name="Suite" verbose="10" >
   <listeners>
 		<listener class-name="PredefinedMethods.TestListener2"></listener>
 	</listeners>
-  <test name="Amazon Test">
+  <test name="Amazon Test" parallel="classes" thread-count="2">
   <classes>
 			 <class name="testing.test.Annotationstest"/>  
+			 <class name="testing.test.LoginSteps"/>  
 			 		
 			</classes>
   </test> <!-- Test -->

@@ -4,13 +4,24 @@
   <listeners>
     <listener class-name="PredefinedMethods.TestListener2"/>
   </listeners>
-  <test name="Amazon Test">
+  <test thread-count="2" name="Amazon Test" parallel="classes">
     <classes>
       <class name="testing.test.Annotationstest"/>
+      <class name="testing.test.LoginSteps"/>
     </classes>
   </test> <!-- Amazon Test -->
-  <test name="Amazon Test(failed)" parallel="none">
+  <test name="Amazon Test(failed)" parallel="classes">
     <classes>
+      <class name="testing.test.LoginSteps">
+        <methods>
+          <include name="choose_delivery_options"/>
+          <include name="add_the_credentials_to_sbi"/>
+          <include name="review_your_order_and_place_order"/>
+          <include name="add_address"/>
+          <include name="proceed_to_buy"/>
+          <include name="user_search_the"/>
+        </methods>
+      </class> <!-- testing.test.LoginSteps -->
       <class name="testing.test.Annotationstest">
         <methods>
           <include name="add_the_credentials_to_sbi"/>
