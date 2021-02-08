@@ -3,6 +3,7 @@
 <suite name="Suite" verbose="10" >
   <listeners>
 		<listener class-name="PredefinedMethods.TestListener2"></listener>
+		<listener class-name="Retryanalyzer.AnnotationTransformer"></listener>
 	</listeners>
   <test name="Amazon Test" parallel="classes" thread-count="2">
   <classes>
